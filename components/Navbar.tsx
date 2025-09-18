@@ -41,7 +41,9 @@ export default function Navbar() {
       <div className="flex gap-6 items-center">
         <Link href="/" className="hover:text-purple-600">Home</Link>
         <Link href="/courses" className="hover:text-purple-600">Courses</Link>
-
+        <Link href="/tutor/dashboard" className="hover:text-purple-600">
+          Tutor Dashboard
+        </Link>
         {/* Cart Icon */}
         <div className="relative">
           <button
