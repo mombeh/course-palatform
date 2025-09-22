@@ -1,8 +1,8 @@
 // /components/CartPopup.tsx
-"use client";
+'use client';
 
-import Link from "next/link";
-import type { Course } from "../data/mockCourse";
+import Link from 'next/link';
+import type { Course } from '../data/mockCourse';
 
 export default function CartPopup({
   addedCourse,
@@ -12,8 +12,18 @@ export default function CartPopup({
   onClose: () => void;
 }) {
   const relatedCourses: Course[] = [
-    { id: "101", title: "Advanced React", price: 59.99, instructor: "Jane Doe" },
-    { id: "102", title: "TypeScript Mastery", price: 49.99, instructor: "Alex Smith" },
+    {
+      id: '101',
+      title: 'Advanced React',
+      price: 59.99,
+      instructor: 'Jane Doe',
+    },
+    {
+      id: '102',
+      title: 'TypeScript Mastery',
+      price: 49.99,
+      instructor: 'Alex Smith',
+    },
   ];
 
   return (

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useParams } from "next/navigation";
-import { mockCourses } from "../../../data/mockCourse";
-import { useCart } from "../../../context/CartContext";
+import { useParams } from 'next/navigation';
+import { mockCourses } from '../../../data/mockCourse';
+import { useCart } from '../../../context/CartContext';
 
 export default function CourseDetailPage() {
   const params = useParams();
@@ -22,7 +22,7 @@ export default function CourseDetailPage() {
 
       <p className="mb-6 text-gray-700">
         {/* placeholder for description */}
-        This is a detailed description of the course, covering syllabus, 
+        This is a detailed description of the course, covering syllabus,
         learning outcomes, and who this course is for.
       </p>
 

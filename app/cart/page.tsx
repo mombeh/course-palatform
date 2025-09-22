@@ -1,8 +1,8 @@
 // /app/cart/page.tsx
-"use client";
+'use client';
 
-import { useCart } from "../../context/CartContext";
-import Link from "next/link";
+import { useCart } from '../../context/CartContext';
+import Link from 'next/link';
 
 export default function CartPage() {
   const { cart, removeCourse } = useCart();
@@ -12,7 +12,12 @@ export default function CartPage() {
       <h1 className="text-3xl font-bold mb-6">Shopping Cart</h1>
 
       {cart.length === 0 ? (
-        <p className="text-gray-600">Your cart is empty. <Link href="/courses" className="text-purple-600 underline">Browse courses</Link></p>
+        <p className="text-gray-600">
+          Your cart is empty.{' '}
+          <Link href="/courses" className="text-purple-600 underline">
+            Browse courses
+          </Link>
+        </p>
       ) : (
         <>
           <ul className="space-y-4">
@@ -38,8 +43,7 @@ export default function CartPage() {
           {/* Cart Total + Checkout */}
           <div className="mt-6 flex justify-between items-center">
             <p className="font-bold text-xl">
-              Total: $
-              {cart.reduce((sum, c) => sum + c.price, 0).toFixed(2)}
+              Total: ${cart.reduce((sum, c) => sum + c.price, 0).toFixed(2)}
             </p>
             <Link
               href="/checkout"

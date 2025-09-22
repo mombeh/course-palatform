@@ -1,15 +1,26 @@
-"use client";
+'use client';
 
-import { Card, CardContent } from "@/components/ui/card";
-import { coursesPerformance } from "../../../data/mockAnalytics";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
-import { exportToCSV } from "../../../utils/exportToCSV";
+import { Card, CardContent } from '@/components/ui/card';
+import { coursesPerformance } from '../../../data/mockAnalytics';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
+} from 'recharts';
+import { exportToCSV } from '../../../utils/exportToCSV';
 
-const COLORS = ["#6366F1", "#22C55E", "#FACC15", "#EF4444"];
+const COLORS = ['#6366F1', '#22C55E', '#FACC15', '#EF4444'];
 
 export default function AnalyticsPage() {
   const handleExport = () => {
-    exportToCSV(coursesPerformance, "tutor_analytics");
+    exportToCSV(coursesPerformance, 'tutor_analytics');
   };
 
   return (
@@ -66,7 +77,10 @@ export default function AnalyticsPage() {
                 label
               >
                 {coursesPerformance.map((_, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
                 ))}
               </Pie>
               <Tooltip />

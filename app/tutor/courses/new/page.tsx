@@ -1,17 +1,17 @@
 // /app/tutor/courses/new/page.tsx
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { tutorCourses, TutorCourse } from "../../../../data/mockTutorCourse";
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { tutorCourses, TutorCourse } from '../../../../data/mockTutorCourse';
 
 export default function CreateCoursePage() {
   const router = useRouter();
 
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [status, setStatus] = useState<"Published" | "Draft">("Draft");
+  const [title, setTitle] = useState('');
+  const [price, setPrice] = useState('');
+  const [description, setDescription] = useState('');
+  const [status, setStatus] = useState<'Published' | 'Draft'>('Draft');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ export default function CreateCoursePage() {
     tutorCourses.push(newCourse);
 
     // Redirect back to My Courses
-    router.push("/tutor/courses");
+    router.push('/tutor/courses');
   };
 
   return (
@@ -73,7 +73,7 @@ export default function CreateCoursePage() {
           <select
             className="mt-1 w-full border rounded px-3 py-2"
             value={status}
-            onChange={(e) => setStatus(e.target.value as "Published" | "Draft")}
+            onChange={(e) => setStatus(e.target.value as 'Published' | 'Draft')}
           >
             <option value="Draft">Draft</option>
             <option value="Published">Published</option>

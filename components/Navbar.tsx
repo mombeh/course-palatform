@@ -19,12 +19,12 @@
 // }
 
 // /components/Navbar.tsx
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useCart } from "../context/CartContext";
-import { useState } from "react";
-import CartDropdown from "./CartDropdown"
+import Link from 'next/link';
+import { useCart } from '../context/CartContext';
+import { useState } from 'react';
+import CartDropdown from './CartDropdown';
 
 export default function Navbar() {
   const { cart } = useCart();
@@ -39,8 +39,12 @@ export default function Navbar() {
       </Link>
 
       <div className="flex gap-6 items-center">
-        <Link href="/" className="hover:text-purple-600">Home</Link>
-        <Link href="/courses" className="hover:text-purple-600">Courses</Link>
+        <Link href="/" className="hover:text-purple-600">
+          Home
+        </Link>
+        <Link href="/courses" className="hover:text-purple-600">
+          Courses
+        </Link>
         <Link href="/tutor/dashboard" className="hover:text-purple-600">
           Tutor Dashboard
         </Link>

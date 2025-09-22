@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { students } from "../../../data/mockStudents";
+import Link from 'next/link';
+import { students } from '../../../data/mockStudents';
 
 export default function StudentsPage() {
   return (

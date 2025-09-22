@@ -1,9 +1,9 @@
 // /app/tutor/courses/[id]/edit/page.tsx
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { useParams, useRouter } from "next/navigation";
-import { tutorCourses, TutorCourse } from "../../../../../data/mockTutorCourse";
+import { useState, useEffect } from 'react';
+import { useParams, useRouter } from 'next/navigation';
+import { tutorCourses, TutorCourse } from '../../../../../data/mockTutorCourse';
 
 export default function EditCoursePage() {
   const router = useRouter();
@@ -11,14 +11,16 @@ export default function EditCoursePage() {
 
   const course = tutorCourses.find((c) => c.id === id);
 
-  const [title, setTitle] = useState(course?.title || "");
-  const [price, setPrice] = useState(course?.price.toString() || "");
-  const [description, setDescription] = useState("");
-  const [status, setStatus] = useState<"Published" | "Draft">(course?.status || "Draft");
+  const [title, setTitle] = useState(course?.title || '');
+  const [price, setPrice] = useState(course?.price.toString() || '');
+  const [description, setDescription] = useState('');
+  const [status, setStatus] = useState<'Published' | 'Draft'>(
+    course?.status || 'Draft',
+  );
 
   useEffect(() => {
     if (!course) {
-      router.push("/tutor/courses"); // if invalid id, go back
+      router.push('/tutor/courses'); // if invalid id, go back
     }
   }, [course, router]);
 
@@ -31,7 +33,7 @@ export default function EditCoursePage() {
     course.status = status;
     // description can be added to mock data later
 
-    router.push("/tutor/courses");
+    router.push('/tutor/courses');
   };
 
   return (
@@ -76,7 +78,7 @@ export default function EditCoursePage() {
           <select
             className="mt-1 w-full border rounded px-3 py-2"
             value={status}
-            onChange={(e) => setStatus(e.target.value as "Published" | "Draft")}
+            onChange={(e) => setStatus(e.target.value as 'Published' | 'Draft')}
           >
             <option value="Draft">Draft</option>
             <option value="Published">Published</option>

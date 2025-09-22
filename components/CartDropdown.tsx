@@ -1,8 +1,8 @@
 // /components/CartDropdown.tsx
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useCart } from "../context/CartContext";
+import Link from 'next/link';
+import { useCart } from '../context/CartContext';
 
 export default function CartDropdown({ total }: { total: string }) {
   const { cart, removeCourse } = useCart();

@@ -1,8 +1,8 @@
 // /app/courses/page.tsx
-"use client";
+'use client';
 
-import { mockCourses } from "../../data/mockCourse";
-import CourseCard from "../../components/CourseCard";
+import { mockCourses } from '../../data/mockCourse';
+import CourseCard from '../../components/CourseCard';
 
 export default function CoursesPage() {
   return (

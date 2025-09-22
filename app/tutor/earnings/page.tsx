@@ -1,9 +1,21 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { earningsStats, monthlyEarnings, transactions } from "../../../data/mockEarnings";
-import { Card, CardContent } from "@/components/ui/card";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { useState } from 'react';
+import {
+  earningsStats,
+  monthlyEarnings,
+  transactions,
+} from '../../../data/mockEarnings';
+import { Card, CardContent } from '@/components/ui/card';
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
 
 export default function EarningsPage() {
   // ✅ Local state so we can update values
@@ -12,7 +24,7 @@ export default function EarningsPage() {
 
   const handlePayout = () => {
     if (stats.pendingPayout === 0) {
-      setMessage("No pending payout available.");
+      setMessage('No pending payout available.');
       return;
     }
 
@@ -57,7 +69,9 @@ export default function EarningsPage() {
             >
               Request Payout
             </button>
-            {message && <p className="text-sm mt-2 text-green-600">{message}</p>}
+            {message && (
+              <p className="text-sm mt-2 text-green-600">{message}</p>
+            )}
           </CardContent>
         </Card>
       </div>
@@ -65,14 +79,21 @@ export default function EarningsPage() {
       {/* Earnings Chart */}
       <Card>
         <CardContent className="p-6">
-          <h2 className="text-lg font-semibold mb-4">Earnings (Last 6 Months)</h2>
+          <h2 className="text-lg font-semibold mb-4">
+            Earnings (Last 6 Months)
+          </h2>
           <ResponsiveContainer width="100%" height={250}>
             <LineChart data={monthlyEarnings}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" />
               <YAxis />
               <Tooltip />
-              <Line type="monotone" dataKey="amount" stroke="#4F46E5" strokeWidth={2} />
+              <Line
+                type="monotone"
+                dataKey="amount"
+                stroke="#4F46E5"
+                strokeWidth={2}
+              />
             </LineChart>
           </ResponsiveContainer>
         </CardContent>

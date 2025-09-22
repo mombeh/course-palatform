@@ -1,22 +1,22 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { questions } from "../../../data/mockeQA";
+import { useState } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { questions } from '../../../data/mockeQA';
 
 export default function QAPage() {
   const [qaList, setQaList] = useState(questions);
-  const [selectedCourse, setSelectedCourse] = useState<string>("all");
-  const [selectedStatus, setSelectedStatus] = useState<string>("all");
+  const [selectedCourse, setSelectedCourse] = useState<string>('all');
+  const [selectedStatus, setSelectedStatus] = useState<string>('all');
   const [reply, setReply] = useState<{ [key: number]: string }>({});
 
   const filteredQA = qaList.filter((q) => {
     const courseMatch =
-      selectedCourse === "all" || q.courseTitle === selectedCourse;
+      selectedCourse === 'all' || q.courseTitle === selectedCourse;
     const statusMatch =
-      selectedStatus === "all" ||
-      (selectedStatus === "answered" && q.answer) ||
-      (selectedStatus === "unanswered" && !q.answer);
+      selectedStatus === 'all' ||
+      (selectedStatus === 'answered' && q.answer) ||
+      (selectedStatus === 'unanswered' && !q.answer);
     return courseMatch && statusMatch;
   });
 
@@ -24,9 +24,9 @@ export default function QAPage() {
 
   const handleReply = (id: number) => {
     setQaList((prev) =>
-      prev.map((q) => (q.id === id ? { ...q, answer: reply[id] || "" } : q))
+      prev.map((q) => (q.id === id ? { ...q, answer: reply[id] || '' } : q)),
     );
-    setReply((prev) => ({ ...prev, [id]: "" }));
+    setReply((prev) => ({ ...prev, [id]: '' }));
   };
 
   return (
@@ -89,7 +89,7 @@ export default function QAPage() {
               ) : (
                 <div className="space-y-2">
                   <textarea
-                    value={reply[q.id] || ""}
+                    value={reply[q.id] || ''}
                     onChange={(e) =>
                       setReply((prev) => ({ ...prev, [q.id]: e.target.value }))
                     }

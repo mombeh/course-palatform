@@ -1,17 +1,19 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { tutorProfile } from "../../../data/mockTutors";
-import { Card, CardContent } from "@/components/ui/card";
+import { useState } from 'react';
+import { tutorProfile } from '../../../data/mockTutors';
+import { Card, CardContent } from '@/components/ui/card';
 
 export default function SettingsPage() {
   const [profile, setProfile] = useState(tutorProfile);
   const [preview, setPreview] = useState<string | null>(profile.avatar || null);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value } = e.target;
-  
-    if (e.target instanceof HTMLInputElement && e.target.type === "checkbox") {
+
+    if (e.target instanceof HTMLInputElement && e.target.type === 'checkbox') {
       setProfile({
         ...profile,
         [name]: e.target.checked,
@@ -23,7 +25,6 @@ export default function SettingsPage() {
       });
     }
   };
-  
 
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -41,8 +42,8 @@ export default function SettingsPage() {
   };
 
   const handleSave = () => {
-    console.log("Updated profile:", profile);
-    alert("✅ Settings saved successfully!");
+    console.log('Updated profile:', profile);
+    alert('✅ Settings saved successfully!');
   };
 
   return (
@@ -58,7 +59,11 @@ export default function SettingsPage() {
           <div className="flex items-center gap-4">
             <div className="w-20 h-20 rounded-full bg-gray-200 flex items-center justify-center overflow-hidden">
               {preview ? (
-                <img src={preview} alt="Profile" className="w-full h-full object-cover" />
+                <img
+                  src={preview}
+                  alt="Profile"
+                  className="w-full h-full object-cover"
+                />
               ) : (
                 <span className="text-sm text-gray-500">No Image</span>
               )}

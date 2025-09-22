@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState, useMemo } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { quizResults } from "../../../data/mockQuizResults";
+import { useState, useMemo } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { quizResults } from '../../../data/mockQuizResults';
 
 export default function ResultsPage() {
-  const [selectedCourse, setSelectedCourse] = useState<string>("all");
+  const [selectedCourse, setSelectedCourse] = useState<string>('all');
 
   const filteredResults =
-    selectedCourse === "all"
+    selectedCourse === 'all'
       ? quizResults
       : quizResults.filter((r) => r.courseTitle === selectedCourse);
 
@@ -24,7 +24,9 @@ export default function ResultsPage() {
     const totalScore = filteredResults.reduce((sum, r) => sum + r.score, 0);
     const avgScore = (totalScore / totalAttempts).toFixed(1);
 
-    const passedCount = filteredResults.filter((r) => r.status === "Passed").length;
+    const passedCount = filteredResults.filter(
+      (r) => r.status === 'Passed',
+    ).length;
     const passRate = ((passedCount / totalAttempts) * 100).toFixed(1);
 
     return { avgScore, passRate, totalAttempts };
@@ -67,7 +69,9 @@ export default function ResultsPage() {
         </Card>
         <Card className="shadow">
           <CardContent className="p-6 text-center">
-            <h2 className="text-sm font-medium text-gray-500">Total Attempts</h2>
+            <h2 className="text-sm font-medium text-gray-500">
+              Total Attempts
+            </h2>
             <p className="text-2xl font-bold">{stats.totalAttempts}</p>
           </CardContent>
         </Card>
@@ -96,9 +100,9 @@ export default function ResultsPage() {
                   </td>
                   <td
                     className={`px-4 py-2 font-semibold ${
-                      result.status === "Passed"
-                        ? "text-green-600"
-                        : "text-red-600"
+                      result.status === 'Passed'
+                        ? 'text-green-600'
+                        : 'text-red-600'
                     }`}
                   >
                     {result.status}

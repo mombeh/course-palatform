@@ -1,7 +1,7 @@
 // /context/CartContext.tsx
-"use client";
+'use client';
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from 'react';
 
 type Course = {
   id: string;
@@ -23,7 +23,9 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   const [cart, setCart] = useState<Course[]>([]);
 
   const addCourse = (course: Course) => {
-    setCart((prev) => (prev.find((c) => c.id === course.id) ? prev : [...prev, course]));
+    setCart((prev) =>
+      prev.find((c) => c.id === course.id) ? prev : [...prev, course],
+    );
   };
 
   const removeCourse = (id: string) => {
@@ -41,6 +43,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const useCart = () => {
   const context = useContext(CartContext);
-  if (!context) throw new Error("useCart must be used within CartProvider");
+  if (!context) throw new Error('useCart must be used within CartProvider');
   return context;
 };

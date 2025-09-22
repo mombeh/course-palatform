@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { reviews } from "../../../data/mockReviews";
+import { useState } from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { reviews } from '../../../data/mockReviews';
 
 export default function ReviewsPage() {
-  const [selectedCourse, setSelectedCourse] = useState<string>("all");
+  const [selectedCourse, setSelectedCourse] = useState<string>('all');
 
   const filteredReviews =
-    selectedCourse === "all"
+    selectedCourse === 'all'
       ? reviews
       : reviews.filter((r) => r.courseTitle === selectedCourse);
 
@@ -52,7 +52,7 @@ export default function ReviewsPage() {
                   <span
                     key={i}
                     className={`${
-                      i < review.rating ? "text-yellow-500" : "text-gray-300"
+                      i < review.rating ? 'text-yellow-500' : 'text-gray-300'
                     }`}
                   >
                     ★

@@ -1,4 +1,3 @@
-
 // "use client"
 
 // import { useState } from "react";
@@ -148,17 +147,20 @@
 //   );
 // }
 
-"use client";
+'use client';
 
-import { useState } from "react";
-import { mockCourses, Course } from "../../data/mockCourse";
+import { useState } from 'react';
+import { mockCourses, Course } from '../../data/mockCourse';
 
 export default function CheckoutPage() {
-  const [paymentMethod, setPaymentMethod] = useState<"card" | "paypal">("card");
+  const [paymentMethod, setPaymentMethod] = useState<'card' | 'paypal'>('card');
   const discountRate = 0.1; // 10% discount
 
   // Calculate total original price
-  const originalPrice = mockCourses.reduce((total, course) => total + course.price, 0);
+  const originalPrice = mockCourses.reduce(
+    (total, course) => total + course.price,
+    0,
+  );
 
   // Calculate discount amount
   const discountAmount = originalPrice * discountRate;
@@ -194,16 +196,19 @@ export default function CheckoutPage() {
                 type="radio"
                 name="payment"
                 value="card"
-                checked={paymentMethod === "card"}
-                onChange={() => setPaymentMethod("card")}
+                checked={paymentMethod === 'card'}
+                onChange={() => setPaymentMethod('card')}
               />
               Card
             </label>
 
-            {paymentMethod === "card" && (
+            {paymentMethod === 'card' && (
               <div className="space-y-3 border p-4 rounded-lg">
                 <div>
-                  <label htmlFor="card-number" className="block mb-1 text-sm font-medium">
+                  <label
+                    htmlFor="card-number"
+                    className="block mb-1 text-sm font-medium"
+                  >
                     Card number
                   </label>
                   <input
@@ -216,7 +221,10 @@ export default function CheckoutPage() {
 
                 <div className="flex flex-col sm:flex-row gap-2">
                   <div className="w-full sm:w-1/2">
-                    <label htmlFor="expiry" className="block mb-1 text-sm font-medium">
+                    <label
+                      htmlFor="expiry"
+                      className="block mb-1 text-sm font-medium"
+                    >
                       MM/YY
                     </label>
                     <input
@@ -227,7 +235,10 @@ export default function CheckoutPage() {
                     />
                   </div>
                   <div className="w-full sm:w-1/2">
-                    <label htmlFor="cvc" className="block mb-1 text-sm font-medium">
+                    <label
+                      htmlFor="cvc"
+                      className="block mb-1 text-sm font-medium"
+                    >
                       CVC
                     </label>
                     <input
@@ -240,7 +251,10 @@ export default function CheckoutPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="name-on-card" className="block mb-1 text-sm font-medium">
+                  <label
+                    htmlFor="name-on-card"
+                    className="block mb-1 text-sm font-medium"
+                  >
                     Name on card
                   </label>
                   <input
@@ -264,8 +278,8 @@ export default function CheckoutPage() {
                 type="radio"
                 name="payment"
                 value="paypal"
-                checked={paymentMethod === "paypal"}
-                onChange={() => setPaymentMethod("paypal")}
+                checked={paymentMethod === 'paypal'}
+                onChange={() => setPaymentMethod('paypal')}
               />
               PayPal
             </label>

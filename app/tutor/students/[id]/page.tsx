@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { useParams } from "next/navigation";
-import { useState } from "react";
-import { students } from "../../../../data/mockStudents";
+import { useParams } from 'next/navigation';
+import { useState } from 'react';
+import { students } from '../../../../data/mockStudents';
 
 export default function StudentDetailPage() {
   const { id } = useParams();
@@ -17,11 +17,12 @@ export default function StudentDetailPage() {
   // ✅ Toggle lesson completion
   const toggleLesson = (index: number) => {
     const updatedLessons = student.lessons?.map((lesson, i) =>
-      i === index ? { ...lesson, completed: !lesson.completed } : lesson
+      i === index ? { ...lesson, completed: !lesson.completed } : lesson,
     );
 
     // ✅ Recalculate overall progress
-    const completedCount = updatedLessons?.filter((l) => l.completed).length || 0;
+    const completedCount =
+      updatedLessons?.filter((l) => l.completed).length || 0;
     const totalLessons = updatedLessons?.length || 1;
     const newProgress = Math.round((completedCount / totalLessons) * 100);
 
@@ -49,7 +50,9 @@ export default function StudentDetailPage() {
             style={{ width: `${student.progress}%` }}
           ></div>
         </div>
-        <p className="text-sm text-gray-600 mt-1">{student.progress}% completed</p>
+        <p className="text-sm text-gray-600 mt-1">
+          {student.progress}% completed
+        </p>
       </div>
 
       {/* Lessons Progress (Editable) */}
@@ -66,11 +69,11 @@ export default function StudentDetailPage() {
                 onClick={() => toggleLesson(index)}
                 className={`px-3 py-1 rounded-md text-sm ${
                   lesson.completed
-                    ? "bg-green-100 text-green-700"
-                    : "bg-red-100 text-red-600"
+                    ? 'bg-green-100 text-green-700'
+                    : 'bg-red-100 text-red-600'
                 }`}
               >
-                {lesson.completed ? "Completed" : "Mark as Done"}
+                {lesson.completed ? 'Completed' : 'Mark as Done'}
               </button>
             </li>
           ))}

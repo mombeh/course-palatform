@@ -36,10 +36,10 @@
 // }
 
 // /components/CourseCard.tsx
-"use client";
+'use client';
 
-import Link from "next/link";
-import type { Course } from "../data/mockCourse";
+import Link from 'next/link';
+import type { Course } from '../data/mockCourse';
 
 export default function CourseCard({ course }: { course: Course }) {
   return (
