@@ -1,36 +1,19 @@
-// // /components/Navbar.tsx
-// "use client";
-
-// import Link from "next/link";
-
-// export default function Navbar() {
-//   return (
-//     <nav className="flex justify-between items-center px-6 py-4 shadow-md bg-white">
-//       <Link href="/" className="text-2xl font-bold text-purple-700">
-//         CourseHub
-//       </Link>
-//       <div className="flex gap-6">
-//         <Link href="/" className="hover:text-purple-600">Home</Link>
-//         <Link href="/courses" className="hover:text-purple-600">Courses</Link>
-//         <Link href="/cart" className="hover:text-purple-600">Cart</Link>
-//       </div>
-//     </nav>
-//   );
-// }
-
 // /components/Navbar.tsx
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useCart } from '../context/CartContext';
-import { useState } from 'react';
-import CartDropdown from './CartDropdown';
+import Link from "next/link";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import type { RootState } from "@/redux/store/store";
+import CartDropdown from "./CartDropdown";
 
 export default function Navbar() {
-  const { cart } = useCart();
   const [open, setOpen] = useState(false);
+  const cart = useSelector((state: RootState) => state.cart.cart);
 
-  const total = cart.reduce((sum, c) => sum + c.price, 0).toFixed(2);
+  const total = cart
+    .reduce((sum, c) => sum + (c.price || 0), 0)
+    .toFixed(2);
 
   return (
     <nav className="flex justify-between items-center px-6 py-4 shadow-md bg-white relative">
@@ -48,6 +31,7 @@ export default function Navbar() {
         <Link href="/tutor/dashboard" className="hover:text-purple-600">
           Tutor Dashboard
         </Link>
+
         {/* Cart Icon */}
         <div className="relative">
           <button

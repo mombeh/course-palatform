@@ -1,12 +1,14 @@
-'use client';
+// /app/courses/[id]/page.tsx
+"use client";
 
-import { useParams } from 'next/navigation';
-import { mockCourses } from '../../../data/mockCourse';
-import { useCart } from '../../../context/CartContext';
+import { useParams } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { mockCourses } from "../../../data/mockCourse";
+import { addToCart } from "@/redux/store/cartSlice";
 
 export default function CourseDetailPage() {
   const params = useParams();
-  const { addCourse } = useCart();
+  const dispatch = useDispatch();
 
   const course = mockCourses.find((c) => c.id === String(params.id));
 
@@ -21,13 +23,12 @@ export default function CourseDetailPage() {
       <p className="text-xl font-bold mb-6">${course.price}</p>
 
       <p className="mb-6 text-gray-700">
-        {/* placeholder for description */}
         This is a detailed description of the course, covering syllabus,
         learning outcomes, and who this course is for.
       </p>
 
       <button
-        onClick={() => addCourse(course)}
+        onClick={() => dispatch(addToCart(course))}
         className="bg-purple-600 text-white px-6 py-2 rounded hover:bg-purple-700 transition"
       >
         Add to Cart

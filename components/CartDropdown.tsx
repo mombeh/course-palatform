@@ -1,11 +1,14 @@
 // /components/CartDropdown.tsx
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useCart } from '../context/CartContext';
+import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store/store";
+import { removeFromCart, clearCart } from "@/redux/store/cartSlice";
 
 export default function CartDropdown({ total }: { total: string }) {
-  const { cart, removeCourse } = useCart();
+  const cart = useSelector((state: RootState) => state.cart.cart);
+  const dispatch = useDispatch();
 
   return (
     <div className="absolute right-0 mt-2 w-80 bg-white shadow-lg rounded-lg p-4 z-50">
@@ -23,7 +26,7 @@ export default function CartDropdown({ total }: { total: string }) {
               >
                 <span>{course.title}</span>
                 <button
-                  onClick={() => removeCourse(course.id)}
+                  onClick={() => dispatch(removeFromCart(course.id))}
                   className="text-red-500 text-sm"
                 >
                   ✕
@@ -35,6 +38,12 @@ export default function CartDropdown({ total }: { total: string }) {
           <p className="font-bold mt-4">Total: ${total}</p>
 
           <div className="flex justify-between mt-4">
+            <button
+              onClick={() => dispatch(clearCart())}
+              className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300"
+            >
+              Clear
+            </button>
             <Link
               href="/cart"
               className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300"
