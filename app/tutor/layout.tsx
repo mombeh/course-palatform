@@ -30,9 +30,8 @@ export default function TutorLayout({ children }: { children: ReactNode }) {
             <Link
               key={link.href}
               href={link.href}
-              className={`px-3 py-2 rounded ${
-                pathname === link.href ? 'bg-purple-600' : 'hover:bg-purple-700'
-              }`}
+              className={`px-3 py-2 rounded ${pathname === link.href ? 'bg-purple-600' : 'hover:bg-purple-700'
+                }`}
             >
               {link.name}
             </Link>
