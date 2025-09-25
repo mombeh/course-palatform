@@ -1,4 +1,3 @@
-// /components/CartDropdown.tsx
 "use client";
 
 import Link from "next/link";
@@ -6,7 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store/store";
 import { removeFromCart, clearCart } from "@/redux/store/cartSlice";
 
-export default function CartDropdown({ total }: { total: string }) {
+export default function CartDropdown({
+  total,
+  onClose,
+}: {
+  total: string;
+  onClose: () => void;
+}) {
   const cart = useSelector((state: RootState) => state.cart.cart);
   const dispatch = useDispatch();
 
@@ -46,12 +51,14 @@ export default function CartDropdown({ total }: { total: string }) {
             </button>
             <Link
               href="/cart"
+              onClick={onClose} // 👈 closes dropdown
               className="bg-gray-200 px-4 py-2 rounded hover:bg-gray-300"
             >
               View Cart
             </Link>
             <Link
               href="/checkout"
+              onClick={onClose} // 👈 closes dropdown
               className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
             >
               Checkout

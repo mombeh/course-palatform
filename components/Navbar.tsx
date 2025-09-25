@@ -1,8 +1,7 @@
-// /components/Navbar.tsx
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "@/redux/store/store";
 import CartDropdown from "./CartDropdown";
@@ -10,10 +9,20 @@ import CartDropdown from "./CartDropdown";
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const cart = useSelector((state: RootState) => state.cart.cart);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const total = cart
-    .reduce((sum, c) => sum + (c.price || 0), 0)
-    .toFixed(2);
+  const total = cart.reduce((sum, c) => sum + (c.price || 0), 0).toFixed(2);
+
+  // 👇 Close when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+    if (open) document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open]);
 
   return (
     <nav className="flex justify-between items-center px-6 py-4 shadow-md bg-white relative">
@@ -33,7 +42,7 @@ export default function Navbar() {
         </Link>
 
         {/* Cart Icon */}
-        <div className="relative">
+        <div className="relative" ref={dropdownRef}>
           <button
             onClick={() => setOpen((prev) => !prev)}
             className="relative flex items-center gap-2"
@@ -47,7 +56,7 @@ export default function Navbar() {
           </button>
 
           {/* Dropdown */}
-          {open && <CartDropdown total={total} />}
+          {open && <CartDropdown total={total} onClose={() => setOpen(false)} />}
         </div>
       </div>
     </nav>

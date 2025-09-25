@@ -1,14 +1,26 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '@/redux/store/store';
+import { setQuestions, addAnswer } from '@/redux/store/qaSlice';
 import { Card, CardContent } from '@/components/ui/card';
-import { questions } from '../../../data/mockeQA';
+import { questions as mockQA } from '../../../data/mockeQA';
 
 export default function QAPage() {
-  const [qaList, setQaList] = useState(questions);
+  const dispatch = useDispatch();
+  const qaList = useSelector((state: RootState) => state.qa.questions);
+
   const [selectedCourse, setSelectedCourse] = useState<string>('all');
   const [selectedStatus, setSelectedStatus] = useState<string>('all');
   const [reply, setReply] = useState<{ [key: number]: string }>({});
+
+  // Load mock questions into Redux store
+  useEffect(() => {
+    if (qaList.length === 0) {
+      dispatch(setQuestions(mockQA));
+    }
+  }, [dispatch, qaList.length]);
 
   const filteredQA = qaList.filter((q) => {
     const courseMatch =
@@ -23,15 +35,47 @@ export default function QAPage() {
   const courses = Array.from(new Set(qaList.map((q) => q.courseTitle)));
 
   const handleReply = (id: number) => {
-    setQaList((prev) =>
-      prev.map((q) => (q.id === id ? { ...q, answer: reply[id] || '' } : q)),
-    );
+    if (!reply[id]) return;
+    dispatch(addAnswer({ id, answer: reply[id] }));
     setReply((prev) => ({ ...prev, [id]: '' }));
   };
+
+  // 🔹 Stats
+  const totalQuestions = qaList.length;
+  const answeredCount = qaList.filter((q) => q.answer).length;
+  const unansweredCount = totalQuestions - answeredCount;
+
+  useEffect(() => {
+    dispatch(setQuestions(mockQA));
+  }, [dispatch]);
 
   return (
     <div className="space-y-8">
       <h1 className="text-2xl font-bold">Q&A Management</h1>
+
+      {/* 🔹 Stats Section */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <Card className="shadow">
+          <CardContent className="p-4 text-center">
+            <h2 className="text-lg font-semibold">Total Questions</h2>
+            <p className="text-2xl font-bold text-purple-600">{totalQuestions}</p>
+          </CardContent>
+        </Card>
+
+        <Card className="shadow">
+          <CardContent className="p-4 text-center">
+            <h2 className="text-lg font-semibold">Answered</h2>
+            <p className="text-2xl font-bold text-green-600">{answeredCount}</p>
+          </CardContent>
+        </Card>
+
+        <Card className="shadow">
+          <CardContent className="p-4 text-center">
+            <h2 className="text-lg font-semibold">Unanswered</h2>
+            <p className="text-2xl font-bold text-red-600">{unansweredCount}</p>
+          </CardContent>
+        </Card>
+      </div>
 
       {/* Filters */}
       <div className="flex gap-4">
