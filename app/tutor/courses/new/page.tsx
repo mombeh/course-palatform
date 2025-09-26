@@ -1,34 +1,34 @@
-// /app/tutor/courses/new/page.tsx
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { tutorCourses, TutorCourse } from '../../../../data/mockTutorCourse';
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import { addCourse } from "@/redux/store/tutorCoursesSlice";
 
 export default function CreateCoursePage() {
+  const dispatch = useDispatch();
   const router = useRouter();
 
-  const [title, setTitle] = useState('');
-  const [price, setPrice] = useState('');
-  const [description, setDescription] = useState('');
-  const [status, setStatus] = useState<'Published' | 'Draft'>('Draft');
+  const [title, setTitle] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [status, setStatus] = useState<"Published" | "Draft">("Draft");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newCourse: TutorCourse = {
-      id: `c${tutorCourses.length + 1}`,
-      title,
-      price: parseFloat(price),
-      status,
-      students: 0,
-    };
+    dispatch(
+      addCourse({
+        id: Date.now().toString(),
+        title,
+        price: parseFloat(price),
+        description,
+        status,
+        students: 0,
+      })
+    );
 
-    // For now, just push into mock data (in real app -> API/DB)
-    tutorCourses.push(newCourse);
-
-    // Redirect back to My Courses
-    router.push('/tutor/courses');
+    router.push("/tutor/courses");
   };
 
   return (

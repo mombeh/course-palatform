@@ -1,4 +1,6 @@
+// /redux/store/qaSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { addNotification } from "./notificationSlice"; // 👈 import notification
 
 interface Question {
     id: number;
@@ -25,6 +27,22 @@ const qaSlice = createSlice({
         setQuestions: (state, action: PayloadAction<Question[]>) => {
             state.questions = action.payload;
         },
+        addQuestion: {
+            reducer: (state, action: PayloadAction<Question>) => {
+                state.questions.unshift(action.payload);
+            },
+            // 👇 prepare callback lets us also trigger side effects like notifications
+            prepare: (question: Omit<Question, "id" | "date" | "answer">) => {
+                const newQuestion: Question = {
+                    id: Date.now(),
+                    date: new Date().toLocaleDateString(),
+                    answer: null,
+                    ...question,
+                };
+
+                return { payload: newQuestion };
+            },
+        },
         addAnswer: (
             state,
             action: PayloadAction<{ id: number; answer: string }>
@@ -35,5 +53,5 @@ const qaSlice = createSlice({
     },
 });
 
-export const { setQuestions, addAnswer } = qaSlice.actions;
+export const { setQuestions, addQuestion, addAnswer } = qaSlice.actions;
 export default qaSlice.reducer;

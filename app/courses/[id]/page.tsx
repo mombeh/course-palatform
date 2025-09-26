@@ -5,6 +5,8 @@ import { useParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { mockCourses } from "../../../data/mockCourse";
 import { addToCart } from "@/redux/store/cartSlice";
+import AskQuestionForm from "@/components/AskQuestionForm";
+
 
 export default function CourseDetailPage() {
   const params = useParams();
@@ -33,6 +35,10 @@ export default function CourseDetailPage() {
       >
         Add to Cart
       </button>
+      <div className="mt-8">
+        <h2 className="text-lg font-semibold mb-2">Ask the Instructor</h2>
+        <AskQuestionForm courseId={parseInt(course.id)} courseTitle={course.title} />
+      </div>
     </div>
   );
 }

@@ -18,12 +18,14 @@ import {
   Bar,
   ResponsiveContainer,
 } from 'recharts';
+import TutorNotifications from "@/components/TutorNotifications";
 
 export default function TutorDashboard() {
   return (
     <div className="space-y-8">
       <h1 className="text-2xl font-bold">Dashboard Overview</h1>
 
+      <TutorNotifications />
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <Card>

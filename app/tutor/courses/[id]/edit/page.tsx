@@ -1,39 +1,46 @@
-// /app/tutor/courses/[id]/edit/page.tsx
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import { tutorCourses, TutorCourse } from '../../../../../data/mockTutorCourse';
+import { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/redux/store/store";
+import { updateCourse } from "@/redux/store/tutorCoursesSlice";
 
 export default function EditCoursePage() {
-  const router = useRouter();
   const { id } = useParams();
+  const router = useRouter();
+  const dispatch = useDispatch();
 
-  const course = tutorCourses.find((c) => c.id === id);
+  const course = useSelector((state: RootState) =>
+    state.tutorCourses.courses.find((c) => c.id === id)
+  );
 
-  const [title, setTitle] = useState(course?.title || '');
-  const [price, setPrice] = useState(course?.price.toString() || '');
-  const [description, setDescription] = useState('');
-  const [status, setStatus] = useState<'Published' | 'Draft'>(
-    course?.status || 'Draft',
+  const [title, setTitle] = useState(course?.title || "");
+  const [price, setPrice] = useState(course?.price.toString() || "");
+  const [description, setDescription] = useState(course?.description || "");
+  const [status, setStatus] = useState<"Published" | "Draft">(
+    course?.status || "Draft"
   );
 
   useEffect(() => {
-    if (!course) {
-      router.push('/tutor/courses'); // if invalid id, go back
-    }
+    if (!course) router.push("/tutor/courses");
   }, [course, router]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!course) return;
 
-    course.title = title;
-    course.price = parseFloat(price);
-    course.status = status;
-    // description can be added to mock data later
+    dispatch(
+      updateCourse({
+        ...course,
+        title,
+        price: parseFloat(price),
+        description,
+        status,
+      })
+    );
 
-    router.push('/tutor/courses');
+    router.push("/tutor/courses");
   };
 
   return (
