@@ -1,0 +1,7 @@
+{
+    "watch": true,
+    "port": 4000,
+    "routes": {
+        "/api/*": "/$1"
+    }
+}
